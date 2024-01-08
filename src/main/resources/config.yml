@@ -1,0 +1,7 @@
+server:
+  port: 15001
+  log_flag: true
+
+token:
+  length: 6
+  expiration(sec): 120
