@@ -89,7 +89,6 @@ $RECYCLE.BIN/
 # End of https://www.toptal.com/developers/gitignore/api/java,macos,windows
 
 # BungeeCord/Minecraft plugin specific #
-*.yml
 plugins/
 crash-reports/
 logs/
