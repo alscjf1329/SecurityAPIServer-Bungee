@@ -10,6 +10,7 @@ public class RandomTokenGenerator {
 
     public static final String NUMBERS = "0123456789";
     private static final int DEFAULT_LENGTH = 6;
+    private static final long DEFAULT_EXPIRATION = 180;
     private static RandomTokenGenerator randomTokenGenerator;
     private final int length;
     private final long expiration;
@@ -20,7 +21,7 @@ public class RandomTokenGenerator {
         length = ConfigManager.getInstance(plugin)
             .getInt(ConfigManager.TOKENS_LENGTH_OPTION_NAME, DEFAULT_LENGTH);
         expiration = ConfigManager.getInstance(plugin)
-            .getLong(ConfigManager.EXPIRATION_OPTION_NAME, DEFAULT_LENGTH);
+            .getLong(ConfigManager.EXPIRATION_OPTION_NAME, DEFAULT_EXPIRATION);
     }
 
     public static RandomTokenGenerator getInstance() {
