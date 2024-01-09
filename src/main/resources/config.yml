@@ -4,4 +4,4 @@ server:
 
 token:
   length: 6
-  expiration(sec): 120
+  expiration(sec): 180
