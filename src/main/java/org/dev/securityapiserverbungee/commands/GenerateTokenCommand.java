@@ -28,7 +28,7 @@ public class GenerateTokenCommand extends Command {
         }
         Plugin plugin = SecurityAPIServer_Bungee.getPluginInstance();
         Configuration configManager = ConfigManager.getInstance(plugin);
-        int length = configManager.getInt(ConfigManager.TOKENS_LENGTH_OPTION_NAME);
+        int length = configManager.getInt(ConfigManager.TOKEN_LENGTH_OPTION_NAME);
         String code = RandomCodeGenerator.getInstance()
             .generate(length, RandomCodeGenerator.NUMBERS);
 

@@ -50,8 +50,6 @@ public class TokenManager {
     }
 
     private boolean isExpired(long expiryTime) {
-        System.out.println(System.currentTimeMillis());
-        System.out.println(expiryTime);
         return System.currentTimeMillis() > expiryTime;
     }
 }

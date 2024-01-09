@@ -17,7 +17,8 @@ public class ConfigManager {
     public static final String PATH_OPTION_FORMAT = "server.path.%s";
     public static final String PORT_OPTION_NAME = "server.port";
     public static final String LOG_OPTION = "server.log_flag";
-    public static final String TOKENS_LENGTH_OPTION_NAME = "token.length";
+    public static final String TOKEN_LENGTH_OPTION_NAME = "token.length";
+    public static final String TOKEN_MAX_AUTHENTICATION_ATTEMPT_COUNT_OPTION_NAME = "token.max_authentication_attempt_count";
     public static final String EXPIRATION_OPTION_NAME = "token.expiration(sec)";
     private static ConfigManager configManager;
     private static Plugin plugin;
