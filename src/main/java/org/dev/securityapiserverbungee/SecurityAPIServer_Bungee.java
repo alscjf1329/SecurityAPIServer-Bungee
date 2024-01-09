@@ -23,7 +23,7 @@ public final class SecurityAPIServer_Bungee extends Plugin {
         clearTokenManagerTask = ProxyServer.getInstance().getScheduler().schedule(this,
             () -> {
                 TokenManager.getInstance().clear();
-                System.out.println("clear!!");
+                System.out.println("clear at " + System.currentTimeMillis());
             }
             , 0L, 5L, TimeUnit.MINUTES);
     }

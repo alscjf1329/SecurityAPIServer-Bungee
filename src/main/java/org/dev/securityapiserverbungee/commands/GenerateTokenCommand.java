@@ -3,13 +3,14 @@ package org.dev.securityapiserverbungee.commands;
 import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
+import net.md_5.bungee.api.plugin.Plugin;
 import org.dev.securityapiserverbungee.SecurityAPIServer_Bungee;
 import org.dev.securityapiserverbungee.config.ConfigManager;
 import org.dev.securityapiserverbungee.dto.TokenDTO;
 import org.dev.securityapiserverbungee.message.Channel;
 import org.dev.securityapiserverbungee.message.Messenger;
 import org.dev.securityapiserverbungee.security.TokenManager;
-import org.dev.securityapiserverbungee.service.RandomTokenGenerator;
+import org.dev.securityapiserverbungee.service.RandomCodeGenerator;
 
 public class GenerateTokenCommand extends Command {
 
@@ -24,8 +25,14 @@ public class GenerateTokenCommand extends Command {
         if (!(commandSender instanceof ProxiedPlayer)) {
             return;
         }
-        TokenDTO token = RandomTokenGenerator.getInstance().generate(RandomTokenGenerator.NUMBERS);
-        TokenManager.getInstance().addToken(commandSender.getName(), () -> token);
+        Plugin plugin = SecurityAPIServer_Bungee.getPluginInstance();
+        int length = ConfigManager.getInstance(plugin)
+            .getInt(ConfigManager.TOKENS_LENGTH_OPTION_NAME);
+        String code = RandomCodeGenerator.getInstance()
+            .generate(length, RandomCodeGenerator.NUMBERS);
+
+        TokenDTO token = TokenManager.getInstance()
+            .addToken(commandSender.getName(), () -> new TokenDTO(() -> code));
 
         String expiration = ConfigManager.getInstance(SecurityAPIServer_Bungee.getPluginInstance())
             .getLong(ConfigManager.EXPIRATION_OPTION_NAME) + "";

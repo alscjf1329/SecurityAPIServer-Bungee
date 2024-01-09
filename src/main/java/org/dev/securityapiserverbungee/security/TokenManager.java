@@ -36,8 +36,10 @@ public class TokenManager {
         return true;
     }
 
-    public void addToken(String nickname, TokenSupplier tokenSupplier) {
-        authTokenMap.put(nickname, tokenSupplier.get());
+    public TokenDTO addToken(String nickname, TokenSupplier tokenSupplier) {
+        TokenDTO token = tokenSupplier.get();
+        authTokenMap.put(nickname, token);
+        return token;
     }
 
     public void clear() {
@@ -48,6 +50,8 @@ public class TokenManager {
     }
 
     private boolean isExpired(long expiryTime) {
+        System.out.println(System.currentTimeMillis());
+        System.out.println(expiryTime);
         return System.currentTimeMillis() > expiryTime;
     }
 }
