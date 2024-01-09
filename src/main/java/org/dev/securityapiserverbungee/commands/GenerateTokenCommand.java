@@ -4,6 +4,7 @@ import net.md_5.bungee.api.CommandSender;
 import net.md_5.bungee.api.connection.ProxiedPlayer;
 import net.md_5.bungee.api.plugin.Command;
 import net.md_5.bungee.api.plugin.Plugin;
+import net.md_5.bungee.config.Configuration;
 import org.dev.securityapiserverbungee.SecurityAPIServer_Bungee;
 import org.dev.securityapiserverbungee.config.ConfigManager;
 import org.dev.securityapiserverbungee.dto.TokenDTO;
@@ -26,16 +27,17 @@ public class GenerateTokenCommand extends Command {
             return;
         }
         Plugin plugin = SecurityAPIServer_Bungee.getPluginInstance();
-        int length = ConfigManager.getInstance(plugin)
-            .getInt(ConfigManager.TOKENS_LENGTH_OPTION_NAME);
+        Configuration configManager = ConfigManager.getInstance(plugin);
+        int length = configManager.getInt(ConfigManager.TOKENS_LENGTH_OPTION_NAME);
         String code = RandomCodeGenerator.getInstance()
             .generate(length, RandomCodeGenerator.NUMBERS);
 
         TokenDTO token = TokenManager.getInstance()
             .addToken(commandSender.getName(), () -> new TokenDTO(() -> code));
 
-        String expiration = ConfigManager.getInstance(SecurityAPIServer_Bungee.getPluginInstance())
-            .getLong(ConfigManager.EXPIRATION_OPTION_NAME) + "";
+        String expiration =
+            String.valueOf(configManager.getLong(ConfigManager.EXPIRATION_OPTION_NAME,
+                TokenDTO.DEFAULT_EXPIRATION));
 
         Messenger.sendPlayer(Channel.SECURITY_SUBCHANNEL.getName(), commandSender.getName(),
             token.getVerificationCode(), expiration);

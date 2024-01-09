@@ -16,6 +16,7 @@ public class SecurityServer {
 
     private static volatile SecurityServer instance = null;
     private static final int DEFAULT_PORT = 15000;
+    private static final boolean DEFAULT_LOG_FLAG = true;
     private HttpServer server;
 
     private SecurityServer(Plugin plugin) {
@@ -38,7 +39,7 @@ public class SecurityServer {
             SecurityAPIServer_Bungee.getPluginInstance());
 
         int port = config.getInt(ConfigManager.PORT_OPTION_NAME, DEFAULT_PORT);
-        boolean logFlag = config.getBoolean(ConfigManager.LOG_OPTION, true);
+        boolean logFlag = config.getBoolean(ConfigManager.LOG_OPTION, DEFAULT_LOG_FLAG);
 
         try {
             server = HttpServer.create(new InetSocketAddress(port), 0);
