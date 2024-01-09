@@ -11,6 +11,7 @@ public class TokenDTO {
     public static final int DEFAULT_AUTHENTICATION_ATTEMPT_COUNT_REMAINING = 5;
     public static final long DEFAULT_EXPIRATION = 180;
     public static final int MILLS_PER_SEC = 1000;
+    private static final int ZERO = 0;
     private final String verificationCode;
     private int authenticationAttemptCountRemaining;
     private final long expiryTime;
@@ -36,6 +37,16 @@ public class TokenDTO {
         this.expiryTime = System.currentTimeMillis() + expiration;
     }
 
+    public boolean isValid(String verificationCode) {
+        if (!(this.verificationCode.equals(verificationCode))) {
+            return false;
+        }
+        if (isExpired()) {
+            return false;
+        }
+        return true;
+    }
+
     public String getVerificationCode() {
         return verificationCode;
     }
@@ -45,6 +56,19 @@ public class TokenDTO {
     }
 
     public void deductAuthenticationAttemptCountRemaining() {
+        if (authenticationAttemptCountRemaining <= ZERO) {
+            return;
+        }
         this.authenticationAttemptCountRemaining--;
+    }
+
+    public boolean isExpired() {
+        if (this.authenticationAttemptCountRemaining <= ZERO) {
+            return true;
+        }
+        if (System.currentTimeMillis() > expiryTime) {
+            return true;
+        }
+        return false;
     }
 }

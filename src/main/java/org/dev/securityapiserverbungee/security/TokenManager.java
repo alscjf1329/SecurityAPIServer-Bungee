@@ -27,13 +27,7 @@ public class TokenManager {
         if (tokenInfo == null) {
             return false;
         }
-        if (isExpired(tokenInfo.getExpiryTime())) {
-            return false;
-        }
-        if (!verificationCode.equals(tokenInfo.getVerificationCode())) {
-            return false;
-        }
-        return true;
+        return tokenInfo.isValid(verificationCode);
     }
 
     public TokenDTO addToken(String nickname, TokenSupplier tokenSupplier) {
@@ -46,10 +40,6 @@ public class TokenManager {
         if (authTokenMap == null) {
             return;
         }
-        authTokenMap.entrySet().removeIf(entry -> isExpired(entry.getValue().getExpiryTime()));
-    }
-
-    private boolean isExpired(long expiryTime) {
-        return System.currentTimeMillis() > expiryTime;
+        authTokenMap.entrySet().removeIf(entry -> entry.getValue().isExpired());
     }
 }
