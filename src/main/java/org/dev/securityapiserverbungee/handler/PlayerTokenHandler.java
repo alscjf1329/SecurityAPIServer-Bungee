@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
+import org.dev.securityapiserverbungee.dto.VerificationResultDTO;
 import org.dev.securityapiserverbungee.security.TokenManager;
 import org.json.JSONObject;
 
@@ -38,11 +39,10 @@ public class PlayerTokenHandler implements HttpHandler {
         String nickname = accessCredentialJson.getString("nickname");
         String verificationCode = accessCredentialJson.getString("verificationCode");
 
-        boolean isValid = TokenManager.getInstance().isValid(nickname, verificationCode);
-
+        VerificationResultDTO resultDTO = TokenManager.getInstance()
+            .authenticate(nickname, verificationCode);
         // JSON으로 변환
-        JSONObject jsonResponse = new JSONObject();
-        jsonResponse.put("isValid", isValid);
+        JSONObject jsonResponse = new JSONObject(resultDTO);
 
         // 응답 헤더 설정
         exchange.getResponseHeaders().set("Content-Type", "application/json");

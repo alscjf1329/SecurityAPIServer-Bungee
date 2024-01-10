@@ -55,11 +55,11 @@ public class TokenDTO {
         return expiryTime;
     }
 
-    public void deductAuthenticationAttemptCountRemaining() {
+    public int deductAuthenticationAttemptCountRemaining() {
         if (authenticationAttemptCountRemaining <= ZERO) {
-            return;
+            return ZERO;
         }
-        this.authenticationAttemptCountRemaining--;
+        return --this.authenticationAttemptCountRemaining;
     }
 
     public boolean isExpired() {

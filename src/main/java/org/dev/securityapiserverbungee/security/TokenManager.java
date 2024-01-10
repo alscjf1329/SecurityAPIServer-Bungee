@@ -3,10 +3,12 @@ package org.dev.securityapiserverbungee.security;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import org.dev.securityapiserverbungee.dto.TokenDTO;
+import org.dev.securityapiserverbungee.dto.VerificationResultDTO;
 import org.dev.securityapiserverbungee.policies.TokenSupplier;
 
 public class TokenManager {
 
+    private static final int ZERO = 0;
     private static TokenManager tokenManager;
     // nickname to token, expiryTime
     private static Map<String, TokenDTO> authTokenMap;
@@ -22,7 +24,18 @@ public class TokenManager {
         return tokenManager;
     }
 
-    public boolean isValid(String nickname, String verificationCode) {
+
+    public VerificationResultDTO authenticate(String nickname, String verificationCode) {
+        TokenDTO tokenInfo = authTokenMap.get(nickname);
+        boolean isValid = validate(nickname, verificationCode);
+        int attemptCountRemaining = ZERO;
+        if (tokenInfo != null) {
+            attemptCountRemaining = tokenInfo.deductAuthenticationAttemptCountRemaining();
+        }
+        return new VerificationResultDTO(isValid, attemptCountRemaining);
+    }
+
+    public boolean validate(String nickname, String verificationCode) {
         TokenDTO tokenInfo = authTokenMap.get(nickname);
         if (tokenInfo == null) {
             return false;
