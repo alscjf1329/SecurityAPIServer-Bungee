@@ -4,4 +4,5 @@ server:
 
 token:
   length: 6
+  max_authentication_attempt_count: 5
   expiration(sec): 180
