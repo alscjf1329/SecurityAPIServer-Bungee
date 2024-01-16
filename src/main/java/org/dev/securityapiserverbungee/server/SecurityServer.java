@@ -39,21 +39,17 @@ public class SecurityServer {
             SecurityAPIServer_Bungee.getPluginInstance());
 
         int port = config.getInt(ConfigManager.PORT_OPTION_NAME, DEFAULT_PORT);
-        boolean logFlag = config.getBoolean(ConfigManager.LOG_OPTION, DEFAULT_LOG_FLAG);
 
         try {
             server = HttpServer.create(new InetSocketAddress(port), 0);
-            if (logFlag) {
-                ConfigOutView.SERVER_START_FORMAT.print(port);
-                ConfigOutView.API_PATH_LIST_TITLE.print();
-            }
+            ConfigOutView.SERVER_START_FORMAT.print(port);
+            ConfigOutView.API_PATH_LIST_TITLE.print();
+
             Arrays.stream(EndPoints.values()).forEach(api -> {
                 String apiPath = config.getString(
                     String.format(ConfigManager.PATH_OPTION_FORMAT, api.getName()),
                     api.getDefaultPath());
-                if (logFlag) {
-                    ConfigOutView.API_PATH_FORMAT.print(api.getName(), apiPath);
-                }
+                ConfigOutView.API_PATH_FORMAT.print(api.getName(), apiPath);
                 server.createContext(apiPath, api.getHandler());
             });
             server.setExecutor(null);

@@ -19,7 +19,6 @@ public class PlayerTokenHandler implements HttpHandler {
             exchange.sendResponseHeaders(405, -1);
             return;
         }
-        System.out.println("received!!!");
 
         InputStreamReader isr = new InputStreamReader(exchange.getRequestBody(),
             StandardCharsets.UTF_8);
