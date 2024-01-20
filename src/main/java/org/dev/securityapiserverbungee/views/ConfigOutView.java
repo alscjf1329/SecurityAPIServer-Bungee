@@ -4,7 +4,7 @@ import org.dev.securityapiserverbungee.SecurityAPIServer_Bungee;
 import org.dev.securityapiserverbungee.config.ConfigManager;
 
 public enum ConfigOutView {
-    SERVER_START_FORMAT("Starting Public API Server on port %s"),
+    SERVER_START_FORMAT("Starting Security API Server on port %s"),
     API_PATH_LIST_TITLE("API Path List"),
     API_PATH_FORMAT("  %s : %s"),
     CLEAR_MESSAGE_FORMAT("clear at %d");

@@ -32,14 +32,13 @@ public class PlayerTokenHandler implements HttpHandler {
 
         // JSON 파싱
         JSONObject jsonObject = new JSONObject(requestBody);
-        JSONObject accessCredentialJson = jsonObject.getJSONObject("AccessCredential");
 
         // JSONObject에서 데이터 추출 후 DTO 생성
-        String nickname = accessCredentialJson.getString("nickname");
-        String verificationCode = accessCredentialJson.getString("verificationCode");
+        String nickname = jsonObject.getString("nickname");
+        String authenticationCode = jsonObject.getString("authenticationCode");
 
         VerificationResultDTO resultDTO = TokenManager.getInstance()
-            .authenticate(nickname, verificationCode);
+            .authenticate(nickname, authenticationCode);
         // JSON으로 변환
         JSONObject jsonResponse = new JSONObject(resultDTO);
 

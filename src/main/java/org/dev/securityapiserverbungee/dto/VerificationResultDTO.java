@@ -3,19 +3,19 @@ package org.dev.securityapiserverbungee.dto;
 public class VerificationResultDTO {
 
     private final boolean isValid;
-    private final int authenticationAttemptCountRemaining;
+    private final int remainingAttempts;
 
     public VerificationResultDTO(boolean isValid, int authenticationAttemptCountRemaining) {
         this.isValid = isValid;
-        this.authenticationAttemptCountRemaining = authenticationAttemptCountRemaining;
+        this.remainingAttempts = authenticationAttemptCountRemaining;
     }
 
     public boolean getIsValid() {
         return isValid;
     }
 
-    public int getAuthenticationAttemptCountRemaining() {
-        return authenticationAttemptCountRemaining;
+    public int getRemainingAttempts() {
+        return remainingAttempts;
     }
 
 }

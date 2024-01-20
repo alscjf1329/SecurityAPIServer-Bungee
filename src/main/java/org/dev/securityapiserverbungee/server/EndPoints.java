@@ -5,7 +5,7 @@ import org.dev.securityapiserverbungee.handler.PlayerTokenHandler;
 
 
 public enum EndPoints {
-    PLAYER_TOKEN("generateUserTokenPath", "/player-token", new PlayerTokenHandler());
+    PLAYER_TOKEN("generateUserTokenPath", "/authenticate/token", new PlayerTokenHandler());
     private final String name;
     private final String defaultPath;
     private final HttpHandler handler;
