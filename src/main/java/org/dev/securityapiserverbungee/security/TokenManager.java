@@ -27,10 +27,13 @@ public class TokenManager {
 
     public VerificationResultDTO authenticate(String nickname, String verificationCode) {
         TokenDTO tokenInfo = authTokenMap.get(nickname);
-        boolean isValid = validate(nickname, verificationCode);
         int attemptCountRemaining = ZERO;
         if (tokenInfo != null) {
             attemptCountRemaining = tokenInfo.deductAuthenticationAttemptCountRemaining();
+        }
+        boolean isValid = validate(nickname, verificationCode);
+        if (isValid) {
+            authTokenMap.remove(nickname);
         }
         return new VerificationResultDTO(isValid, attemptCountRemaining);
     }
