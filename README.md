@@ -38,7 +38,7 @@ token:
 위 사진처럼 인증코드가 발급됨
 
 - 해당 `849305` 인증 코드 <br>
-  POST `localhost:15001/authenticate/token` 요청 보낸 결과
+  POST `localhost:15001/authenticate/token` 요청 보낸 결과 <br>
 ![인증 성공.png](./img/인증%20성공.png)<br>
 위 사진에서 다음을 확인할 수 있다:
   + isValid : 인증 결과
