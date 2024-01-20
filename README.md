@@ -34,12 +34,12 @@ token:
 ## 적용 확인 테스트
 [Postman 작성](https://www.postman.com/maintenance-astronaut-53396501/workspace/minecraft-api/request/25507989-76a5a2d5-e397-4798-ab16-e88623ecf65c?ctx=documentation)
 - `/token` 커맨드 <br>
-![인증코드 발급.png](src%2Fmain%2Fresources%2F%EC%9D%B8%EC%A6%9D%EC%BD%94%EB%93%9C%20%EB%B0%9C%EA%B8%89.png)<br>
+![인증코드 발급.png](./img/인증코드%20발급.png)<br>
 위 사진처럼 인증코드가 발급됨
 
 - 해당 `849305` 인증 코드 <br>
   POST `localhost:15001/authenticate/token` 요청 보낸 결과
-![인증 성공.png](src%2Fmain%2Fresources%2F%EC%9D%B8%EC%A6%9D%20%EC%84%B1%EA%B3%B5.png)<br>
+![인증 성공.png](./img/인증%20성공.png)<br>
 위 사진에서 다음을 확인할 수 있다:
   + isValid : 인증 결과
   + remainingAttempts : 남은 인증 횟수
