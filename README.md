@@ -32,7 +32,8 @@ token:
 ```
 
 ## 적용 확인 테스트
-[Postman 작성](https://www.postman.com/maintenance-astronaut-53396501/workspace/minecraft-api/request/25507989-76a5a2d5-e397-4798-ab16-e88623ecf65c?ctx=documentation)
+### [Postman URL](https://www.postman.com/maintenance-astronaut-53396501/workspace/minecraft-api/request/25507989-76a5a2d5-e397-4798-ab16-e88623ecf65c?ctx=documentation)
+
 - `/token` 커맨드 <br>
 ![인증코드 발급.png](./img/인증코드%20발급.png)<br>
 위 사진처럼 인증코드가 발급됨
