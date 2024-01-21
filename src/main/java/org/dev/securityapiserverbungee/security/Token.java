@@ -1,12 +1,14 @@
-package org.dev.securityapiserverbungee.dto;
+package org.dev.securityapiserverbungee.security;
 
+import lombok.Getter;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import org.dev.securityapiserverbungee.SecurityAPIServer_Bungee;
 import org.dev.securityapiserverbungee.config.ConfigManager;
 import org.dev.securityapiserverbungee.policies.VerificationCodeSupplier;
 
-public class TokenDTO {
+@Getter
+public class Token {
 
     public static final int DEFAULT_AUTHENTICATION_ATTEMPT_COUNT_REMAINING = 5;
     public static final long DEFAULT_EXPIRATION = 180;
@@ -16,7 +18,7 @@ public class TokenDTO {
     private int authenticationAttemptCountRemaining;
     private final long expiryTime;
 
-    public TokenDTO(VerificationCodeSupplier verificationCodeSupplier) {
+    public Token(VerificationCodeSupplier verificationCodeSupplier) {
         Plugin plugin = SecurityAPIServer_Bungee.getPluginInstance();
         Configuration configuration = ConfigManager.getInstance(plugin);
         long expiration =
@@ -30,7 +32,7 @@ public class TokenDTO {
         this.expiryTime = System.currentTimeMillis() + expiration;
     }
 
-    public TokenDTO(VerificationCodeSupplier verificationCodeSupplier,
+    public Token(VerificationCodeSupplier verificationCodeSupplier,
         int authenticationAttemptCountRemaining, long expiration) {
         this.verificationCode = verificationCodeSupplier.get();
         this.authenticationAttemptCountRemaining = authenticationAttemptCountRemaining;
@@ -45,14 +47,6 @@ public class TokenDTO {
             return false;
         }
         return true;
-    }
-
-    public String getVerificationCode() {
-        return verificationCode;
-    }
-
-    public long getExpiryTime() {
-        return expiryTime;
     }
 
     public int deductAuthenticationAttemptCountRemaining() {

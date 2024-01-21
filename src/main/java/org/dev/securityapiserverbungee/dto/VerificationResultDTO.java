@@ -1,5 +1,8 @@
 package org.dev.securityapiserverbungee.dto;
 
+import lombok.Getter;
+
+@Getter
 public class VerificationResultDTO {
 
     private final boolean isValid;
@@ -9,13 +12,4 @@ public class VerificationResultDTO {
         this.isValid = isValid;
         this.remainingAttempts = authenticationAttemptCountRemaining;
     }
-
-    public boolean getIsValid() {
-        return isValid;
-    }
-
-    public int getRemainingAttempts() {
-        return remainingAttempts;
-    }
-
 }

@@ -7,7 +7,7 @@ import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
 import org.dev.securityapiserverbungee.SecurityAPIServer_Bungee;
 import org.dev.securityapiserverbungee.config.ConfigManager;
-import org.dev.securityapiserverbungee.dto.TokenDTO;
+import org.dev.securityapiserverbungee.security.Token;
 import org.dev.securityapiserverbungee.message.Channel;
 import org.dev.securityapiserverbungee.message.Messenger;
 import org.dev.securityapiserverbungee.security.TokenManager;
@@ -32,12 +32,12 @@ public class GenerateTokenCommand extends Command {
         String code = RandomCodeGenerator.getInstance()
             .generate(length, RandomCodeGenerator.NUMBERS);
 
-        TokenDTO token = TokenManager.getInstance()
-            .addToken(commandSender.getName(), () -> new TokenDTO(() -> code));
+        Token token = TokenManager.getInstance()
+            .addToken(commandSender.getName(), () -> new Token(() -> code));
 
         String expiration =
             String.valueOf(configManager.getLong(ConfigManager.EXPIRATION_OPTION_NAME,
-                TokenDTO.DEFAULT_EXPIRATION));
+                Token.DEFAULT_EXPIRATION));
 
         Messenger.sendPlayer(Channel.SECURITY_SUBCHANNEL.getName(), commandSender.getName(),
             token.getVerificationCode(), expiration);
