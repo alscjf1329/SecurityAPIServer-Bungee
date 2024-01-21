@@ -1,5 +1,6 @@
 package org.dev.securityapiserverbungee.security;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.config.Configuration;
@@ -8,6 +9,7 @@ import org.dev.securityapiserverbungee.config.ConfigManager;
 import org.dev.securityapiserverbungee.policies.VerificationCodeSupplier;
 
 @Getter
+@AllArgsConstructor
 public class Token {
 
     public static final int DEFAULT_AUTHENTICATION_ATTEMPT_COUNT_REMAINING = 5;
@@ -29,13 +31,6 @@ public class Token {
             ConfigManager.TOKEN_MAX_AUTHENTICATION_ATTEMPT_COUNT_OPTION_NAME,
             DEFAULT_AUTHENTICATION_ATTEMPT_COUNT_REMAINING);
         this.verificationCode = verificationCodeSupplier.get();
-        this.expiryTime = System.currentTimeMillis() + expiration;
-    }
-
-    public Token(VerificationCodeSupplier verificationCodeSupplier,
-        int authenticationAttemptCountRemaining, long expiration) {
-        this.verificationCode = verificationCodeSupplier.get();
-        this.authenticationAttemptCountRemaining = authenticationAttemptCountRemaining;
         this.expiryTime = System.currentTimeMillis() + expiration;
     }
 
