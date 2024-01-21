@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    implementation "org.json:json:20231013"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     compileOnly "io.github.waterfallmc:waterfall-api:1.19-R0.1-SNAPSHOT"
 }
 
