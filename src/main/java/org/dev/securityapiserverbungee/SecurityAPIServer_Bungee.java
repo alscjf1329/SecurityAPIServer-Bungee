@@ -5,6 +5,7 @@ import net.md_5.bungee.api.ProxyServer;
 import net.md_5.bungee.api.plugin.Plugin;
 import net.md_5.bungee.api.scheduler.ScheduledTask;
 import org.dev.securityapiserverbungee.commands.GenerateTokenCommand;
+import org.dev.securityapiserverbungee.commands.ReloadCommand;
 import org.dev.securityapiserverbungee.server.SecurityServer;
 import org.dev.securityapiserverbungee.tasks.ClearTokensTask;
 
@@ -20,6 +21,8 @@ public final class SecurityAPIServer_Bungee extends Plugin {
         new Thread(() -> SecurityServer.getInstance(this).start()).start();
         ProxyServer.getInstance().getPluginManager()
             .registerCommand(this, new GenerateTokenCommand());
+        ProxyServer.getInstance().getPluginManager()
+            .registerCommand(this, new ReloadCommand());
         clearTokenSchedule = ProxyServer.getInstance().getScheduler().schedule(this,
             new ClearTokensTask(), 0L, 5L, TimeUnit.MINUTES);
     }

@@ -64,6 +64,4 @@ public class SecurityServer {
             server.stop(0);
         }
     }
-
-
 }
