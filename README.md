@@ -12,10 +12,11 @@ SecurityAPIServer-Bungee는 Minecraft Bungee 서버 플러그인으로, 웹 백�
 
 ### 플러그인 적용 방법
 - Bungee 서버 내 `plugins` 디렉토리에 `SecurityAPIServer-Bungee.jar` 파일 존재해야 합니다. 
-- Bungee 서버 내 `plugins/libs` 디렉토리에 `json-20231013` 이상의 라이브러리가 존재해야 합니다.
-    - JSON 라이브러리는 아래 Maven 저장소 URL에서 찾을 수 있습니다:
-        - [JSON 라이브러리 - Maven Repository](https://mvnrepository.com/artifact/org.json/json)
-        - [JSON 라이브러리 JAR file 바로 Download](https://search.maven.org/remotecontent?filepath=org/json/json/20231013/json-20231013.jar)
+- Bungee 서버 내 `plugins/libs` 디렉토리에 존재해야 하는 라이브러리: 
+  - `json-20231013` 이상의 라이브러리
+    - [JSON 라이브러리 - Maven Repository](https://mvnrepository.com/artifact/org.json/json)
+  - `projectlombok` 1.18.30이상의 라이브러리
+    - [Project Lombok 라이브러리 - Public Doc](https://projectlombok.org/download)
 
 ### `config.yml` 설정 파일
 - 플러그인을 적용한 후 서버를 시작하면 `plugins/SecurityAPIServer-Bungee` 디렉토리에 `config.yml` 설정 파일이 생성됩니다.
